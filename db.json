@@ -20,57 +20,57 @@
     "badges": [
         {
             "nome":"#TamoJuntoSempre",
-            "imgBadges": "../../assets/img/home/tamo-junto.svg",
-            "imgModal": "../../assets/img/home/tamo-junto.svg",
+            "imgBadges": "tamo-junto.svg",
+            "imgModal": "tamo-junto.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         },
         {
             "nome":"#Camisa10",
-            "imgBadges": "../../assets/img/home/camisa-10.svg",
-            "imgModal": "../../assets/img/home/tamo-junto.svg",
+            "imgBadges": "camisa-10.svg",
+            "imgModal": "tamo-junto.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         },
         {
             "nome":"#MãoNaMassa",
-            "imgBadges": "../../assets/img/home/mao-na-massa.svg",
-            "imgModal": "../../assets/img/home/tamo-junto.svg",
+            "imgBadges": "mao-na-massa.svg",
+            "imgModal": "tamo-junto.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         },
         {
             "nome":"#PontaFirme e #MandaBem",
-            "imgBadges": "../../assets/img/home/ponta-firme.svg",
-            "imgModal": "../../assets/img/home/tamo-junto.svg",
+            "imgBadges": "ponta-firme.svg",
+            "imgModal": "tamo-junto.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         },
         {
             "nome":"#ChapaDoCliente",
-            "imgBadges": "../../assets/img/home/chapa-cliente.svg",
-            "imgModal": "../../assets/img/home/tamo-junto.svg",
+            "imgBadges": "chapa-cliente.svg",
+            "imgModal": "tamo-junto.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         },
         {
             "nome":"#EstagDoAno",
-            "imgBadges": "../../assets/img/home/estag-ano.svg",
-            "imgModal": "../../assets/img/home/tamo-junto.svg",
+            "imgBadges": "estag-ano.svg",
+            "imgModal": "tamo-junto.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         },
         {
             "nome":"#DextraInfluencer",
-            "imgBadges": "../../assets/img/home/dextra-influencer.svg",
-            "imgModal": "../../assets/img/home/tamo-junto.svg",
+            "imgBadges": "dextra-influencer.svg",
+            "imgModal": "tamo-junto.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         },
         {
             "nome":"#Dextrou",
-            "imgBadges": "../../assets/img/home/dextrou.svg",
-            "imgModal": "../../assets/img/home/tamo-junto.svg",
+            "imgBadges": "dextrou.svg",
+            "imgModal": "tamo-junto.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         }
