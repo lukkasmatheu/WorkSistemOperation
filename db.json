@@ -11,10 +11,10 @@
     ],
 
     "tribos": [
-        {"logoImg": "../../assets/img/tribo/mux.svg","nameTribo":"Mux","title": "Tribo da Mux","id": 0,"description":"Makers of User Experience é responsável por trazer a melhor experiencia para o usuário nos projetos" },
-        {"logoImg": "../../assets/img/tribo/delta.svg" ,"nameTribo":"Delta","title": "Tribo Delta","id": 1,"description":"Delta é responsável por trazer a melhor experiencia para o usuário nos projetos." },
-        {"logoImg": "../../assets/img/tribo/atena.svg","nameTribo":"Atena","title": "Tribo Atena","id": 2,"description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elementum dui. Fusce accumsan metus mauris, efficitur mollis elit fringilla eu." },
-        {"logoImg": "../../assets/img/tribo/maori.svg" ,"nameTribo":"Maori","title": "Tribo Maori","id": 3,"description":"Donec quis vestibulum lorem. Nam vel egestas justo. Ut fringilla tristique velit, tincidunt gravida felis luctus venenatis. " } 
+        {"logoImg": "mux.svg","nameTribo":"Mux","title": "Tribo da Mux","id": 0,"description":"Makers of User Experience é responsável por trazer a melhor experiencia para o usuário nos projetos" },
+        {"logoImg": "delta.svg" ,"nameTribo":"Delta","title": "Tribo Delta","id": 1,"description":"Delta é responsável por trazer a melhor experiencia para o usuário nos projetos." },
+        {"logoImg": "atena.svg","nameTribo":"Atena","title": "Tribo Atena","id": 2,"description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elementum dui. Fusce accumsan metus mauris, efficitur mollis elit fringilla eu." },
+        {"logoImg": "maori.svg" ,"nameTribo":"Maori","title": "Tribo Maori","id": 3,"description":"Donec quis vestibulum lorem. Nam vel egestas justo. Ut fringilla tristique velit, tincidunt gravida felis luctus venenatis. " } 
     ],
 
     "badges": [
@@ -49,7 +49,7 @@
         {
             "nome":"#ChapaDoCliente",
             "imgBadges": "chapa-cliente.svg",
-            "imgModal": "chapa-cliente.svg",
+            "imgModal": "chapa-do-cliente.svg",
             "detalhes":["Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário.","Chega junto com a galera pra o que for necessário."],
             "descricao":"Este badge é pra quem é “parça” do cliente, se entrega totalmente à causa e tem ideias brilhantes para solucionar os problemas."
         },
@@ -85,6 +85,11 @@
         "mensagem":"Cachorrinha do ber, extremamente fofinha",
         "badge":"",
         "tribo":""
+    }
+    ],
+    "triboesq":[{
+        "tribo":""
     }]
+
 
 }
