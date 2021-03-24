@@ -9,12 +9,13 @@ void queue_append (queue_t **queue, queue_t *elem){
     // - o elemento deve existir                    CHECK!!!!
     // Insere um elemento no final da fila.         
 
-    if(queue == NULL && elem == NULL){
+    if(queue == NULL || elem == NULL){
         if(queue == NULL){
             printf("\nFila inexistente\n");
         }else{
             printf("\nElemento inexistente\n");
         }
+        return;
     }else if(elem->prev == NULL && elem->next == NULL){
         if(*queue == NULL){
             *queue = elem ;
@@ -40,7 +41,35 @@ void queue_append (queue_t **queue, queue_t *elem){
 // Retorno: apontador para o elemento removido, ou NULL se erro
 
 queue_t *queue_remove (queue_t **queue, queue_t *elem) {
-    return NULL;
+    int achou = 0;
+    if(queue == NULL || elem == NULL){
+        if(queue == NULL){
+            printf("\nFila inexistente\n");
+        }else{
+            printf("\nElemento inexistente\n");
+        }
+        return NULL;
+    }
+    else if(*queue == NULL){
+        printf("\nFila vazia\n");
+        return NULL;
+    }
+    queue_t *auxiliar;
+    for(queue_t *auxiliar = *queue; auxiliar->next != queue ;auxiliar = auxiliar->next ){
+        if(auxiliar == elem){
+            achou = 1;
+            break;
+        }
+    }
+    if(achou == 1){
+        if(auxiliar->next == auxiliar && auxiliar->prev == auxiliar ){
+            *queue = (*queue)->prev = (*queue)->next = NULL;
+        }
+    }else{
+        printf("\nElemento nao encontrado na lista\n");
+        return NULL;
+    }
+    
 }
 
 
@@ -48,16 +77,11 @@ void queue_print (char *name, queue_t *queue, void print_elem (void*) ) {
 
 }
 
+
 int queue_size (queue_t *queue) {
     if(!queue) return 0;
-
-    queue_t *next;
-    int i=0;
-    next = queue;
-    while(!next){
-        next = next->next;
-        i++;
-    }
-    
+    int i;
+    queue_t *auxiliar = queue;
+    for(i=1; auxiliar->next != queue ; i++ , auxiliar = auxiliar->next )
     return i;
 }
