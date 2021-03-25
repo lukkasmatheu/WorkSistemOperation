@@ -22,19 +22,27 @@ void queue_append (queue_t **queue, queue_t *elem){
             (*queue)->prev = (*queue)->next = elem;
         }
         else{
-            elem->prev = (*queue)->prev;
-            (*queue)->prev = elem ;
-            elem->next = *queue;
-            elem->prev->next = elem;
+            // elem->prev = (*queue)->prev;
+            // (elem->prev)->next = elem;
+            // (*queue)->prev = elem ;
+            // elem->next = *queue;
+
+            printf("esta aqui");
+                    elem->next = *queue;
+                    elem->prev = (*queue)->prev;
+                    ((*queue)->prev)->next = elem;
+                    (*queue)->prev = elem;
+
         }
     }else{
         printf("\nElemento ja esta em outra fila\n");
     }
 }
 
+
 // Remove o elemento indicado da fila, sem o destruir.
 // Condicoes a verificar, gerando msgs de erro:
-// - a fila deve existir
+// - a fila deve existir                        CHECK!!!!
 // - a fila nao deve estar vazia
 // - o elemento deve existir
 // - o elemento deve pertencer a fila indicada
@@ -54,8 +62,8 @@ queue_t *queue_remove (queue_t **queue, queue_t *elem) {
         printf("\nFila vazia\n");
         return NULL;
     }
-    queue_t *auxiliar;
-    for(queue_t *auxiliar = *queue; auxiliar->next != queue ;auxiliar = auxiliar->next ){
+    queue_t *auxiliar = *queue;
+    for( auxiliar ; auxiliar->next != *queue ;auxiliar = auxiliar->next ){
         if(auxiliar == elem){
             achou = 1;
             break;
@@ -64,7 +72,12 @@ queue_t *queue_remove (queue_t **queue, queue_t *elem) {
     if(achou == 1){
         if(auxiliar->next == auxiliar && auxiliar->prev == auxiliar ){
             *queue = (*queue)->prev = (*queue)->next = NULL;
+            
+        }else{
+            auxiliar->prev->next = auxiliar->next;
+            auxiliar->next->prev = auxiliar->prev;
         }
+        return auxiliar;
     }else{
         printf("\nElemento nao encontrado na lista\n");
         return NULL;
@@ -74,7 +87,14 @@ queue_t *queue_remove (queue_t **queue, queue_t *elem) {
 
 
 void queue_print (char *name, queue_t *queue, void print_elem (void*) ) {
-
+    if(queue == NULL){
+        printf("\nFila vazia\n");
+        return;
+    }
+    queue_t *auxiliar = queue ;
+    for( auxiliar ; auxiliar->next != queue ;auxiliar = auxiliar->next ){
+       print_elem(auxiliar);
+    }
 }
 
 
@@ -82,6 +102,6 @@ int queue_size (queue_t *queue) {
     if(!queue) return 0;
     int i;
     queue_t *auxiliar = queue;
-    for(i=1; auxiliar->next != queue ; i++ , auxiliar = auxiliar->next )
+    for(i=1, auxiliar; auxiliar->next != queue ; i++ , auxiliar = auxiliar->next )
     return i;
 }

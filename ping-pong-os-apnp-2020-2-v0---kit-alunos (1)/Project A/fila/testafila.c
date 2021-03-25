@@ -56,11 +56,14 @@ int fila_correta (filaint_t *fila)
    filaint_t *aux ;
 
    // uma fila vazia sempre está correta
-   if (!fila)
+   if (!fila){
+      
       return 1 ;
+   }
 
    // fila com um só elemento e correta
    if ((fila->next == fila) && (fila->prev == fila))
+      printf("fila vazia");
       return 1 ;
 
    // fila com um só elemento, mas incorreta
@@ -120,6 +123,7 @@ int main (int argc, char **argv, char **envp)
    fila0 = NULL ;
    for (i=0; i<N; i++)
    {
+      printf("\n%d %d\n",queue_size ((queue_t*) fila0), i);
       assert (queue_size ((queue_t*) fila0) == i) ;
       queue_append ((queue_t **) &fila0, (queue_t*) &item[i]) ;
       assert (fila_correta (fila0)) ;
@@ -127,212 +131,212 @@ int main (int argc, char **argv, char **envp)
 
    // Teste: contar o numero de elementos na fila e verificar a ordem
    // dos elementos inseridos
-   // printf ("Testando tamanho da fila e ordem dos %d elementos...\n", N) ;
-   // aux = fila0 ;
-   // i=0 ;
-   // do
-   // {
-   //    assert (i == aux->id) ; // testa posição do elemento i
-   //    i++ ;
-   //    aux = aux->next ;
-   // } while (aux != fila0) ;
+   printf ("Testando tamanho da fila e ordem dos %d elementos...\n", N) ;
+   aux = fila0 ;
+   i=0 ;
+   do
+   {
+      assert (i == aux->id) ; // testa posição do elemento i
+      i++ ;
+      aux = aux->next ;
+   } while (aux != fila0) ;
 
-   // assert (i == N) ;
+   assert (i == N) ;
 
-   // assert (queue_size ((queue_t*) fila0) == N) ;
+   assert (queue_size ((queue_t*) fila0) == N) ;
 
-   // printf ("Testes de insercao funcionaram!\n") ;
+   printf ("Testes de insercao funcionaram!\n") ;
 
-   // // PARTE 2: queue_remove ====================================================
+   // PARTE 2: queue_remove ====================================================
 
-   // // esvazia fila0, retirando sempre o primeiro elemento
-   // printf ("Remocao %d vezes o primeiro elemento...\n", N) ;
-   // i=0 ;
-   // while (i<N)
-   // {
-   //    aux = fila0 ;
-   //    queue_remove ((queue_t**) &fila0, (queue_t*) aux) ;
-   //    assert (fila_correta (fila0)) ;  // estrutura continua correta
-   //    assert (aux->id == i) ;            // testa ordem do elemento removido
-   //    assert (aux->prev == NULL) ;       // testa elemento removido
-   //    assert (aux->next == NULL) ;       // testa elemento removido
-   //    i++ ;
-   // }
-   // assert (fila0 == NULL) ;             // fila deve estar vazia
-   // printf ("Ok, apos %d remocoes a fila ficou vazia\n", N) ;
+   // esvazia fila0, retirando sempre o primeiro elemento
+   printf ("Remocao %d vezes o primeiro elemento...\n", N) ;
+   i=0 ;
+   while (i<N)
+   {
+      aux = fila0 ;
+      queue_remove ((queue_t**) &fila0, (queue_t*) aux) ;
+      assert (fila_correta (fila0)) ;  // estrutura continua correta
+      assert (aux->id == i) ;            // testa ordem do elemento removido
+      assert (aux->prev == NULL) ;       // testa elemento removido
+      assert (aux->next == NULL) ;       // testa elemento removido
+      i++ ;
+   }
+   assert (fila0 == NULL) ;             // fila deve estar vazia
+   printf ("Ok, apos %d remocoes a fila ficou vazia\n", N) ;
 
-   // // reconstroi fila de teste
-   // fila0 = NULL ;
-   // for (i=0; i<N; i++)
-   //    queue_append ((queue_t**) &fila0, (queue_t*) &item[i]) ;
+   // reconstroi fila de teste
+   fila0 = NULL ;
+   for (i=0; i<N; i++)
+      queue_append ((queue_t**) &fila0, (queue_t*) &item[i]) ;
 
-   // // esvazia fila0, retirando sempre o segundo elemento
-   // printf ("Remocao %d vezes o segundo elemento...\n", N) ;
-   // i=0 ;
-   // while (i<N)
-   // {
-   //    aux = fila0->next ;
-   //    queue_remove ((queue_t**) &fila0, (queue_t*) aux) ;
-   //    assert (fila_correta (fila0)) ;  // estrutura continua correta
-   //    assert (aux->id == ((i+1)%N)) ;    // testa ordem do elemento removido
-   //    assert (aux->prev == NULL) ;       // testa elemento removido
-   //    assert (aux->next == NULL) ;       // testa elemento removido
-   //    i++ ;
-   // }
-   // assert (fila0 == NULL) ;             // fila deve estar vazia
-   // printf ("Ok, apos %d remocoes a fila ficou vazia\n", N) ;
+   // esvazia fila0, retirando sempre o segundo elemento
+   printf ("Remocao %d vezes o segundo elemento...\n", N) ;
+   i=0 ;
+   while (i<N)
+   {
+      aux = fila0->next ;
+      queue_remove ((queue_t**) &fila0, (queue_t*) aux) ;
+      assert (fila_correta (fila0)) ;  // estrutura continua correta
+      assert (aux->id == ((i+1)%N)) ;    // testa ordem do elemento removido
+      assert (aux->prev == NULL) ;       // testa elemento removido
+      assert (aux->next == NULL) ;       // testa elemento removido
+      i++ ;
+   }
+   assert (fila0 == NULL) ;             // fila deve estar vazia
+   printf ("Ok, apos %d remocoes a fila ficou vazia\n", N) ;
 
-   // // reconstroi fila de teste
-   // fila0 = NULL ;
-   // for (i=0; i<N; i++)
-   //    queue_append ((queue_t**) &fila0, (queue_t*) &item[i]) ;
+   // reconstroi fila de teste
+   fila0 = NULL ;
+   for (i=0; i<N; i++)
+      queue_append ((queue_t**) &fila0, (queue_t*) &item[i]) ;
 
-   // // esvazia fila0, retirando sempre o último elemento
-   // printf ("Remocao %d vezes o último elemento...\n", N) ;
-   // i=0 ;
-   // while (i<N)
-   // {
-   //    aux = fila0->prev ;
-   //    queue_remove ((queue_t**) &fila0, (queue_t*) aux) ;
-   //    assert (fila_correta (fila0)) ;  // estrutura continua correta
-   //    assert (aux->id+i == N-1) ;        // testa ordem do elemento removido
-   //    assert (aux->prev == NULL) ;       // testa elemento removido
-   //    assert (aux->next == NULL) ;       // testa elemento removido
-   //    i++ ;
-   // }
-   // assert (fila0 == NULL) ;             // fila deve estar vazia
-   // printf ("Ok, apos %d remocoes a fila ficou vazia\n", N) ;
+   // esvazia fila0, retirando sempre o último elemento
+   printf ("Remocao %d vezes o último elemento...\n", N) ;
+   i=0 ;
+   while (i<N)
+   {
+      aux = fila0->prev ;
+      queue_remove ((queue_t**) &fila0, (queue_t*) aux) ;
+      assert (fila_correta (fila0)) ;  // estrutura continua correta
+      assert (aux->id+i == N-1) ;        // testa ordem do elemento removido
+      assert (aux->prev == NULL) ;       // testa elemento removido
+      assert (aux->next == NULL) ;       // testa elemento removido
+      i++ ;
+   }
+   assert (fila0 == NULL) ;             // fila deve estar vazia
+   printf ("Ok, apos %d remocoes a fila ficou vazia\n", N) ;
 
-   // // reconstroi fila de teste
-   // fila0 = NULL ;
-   // for (i=0; i<N; i++)
-   //    queue_append ((queue_t**) &fila0, (queue_t*) &item[i]) ;
+   // reconstroi fila de teste
+   fila0 = NULL ;
+   for (i=0; i<N; i++)
+      queue_append ((queue_t**) &fila0, (queue_t*) &item[i]) ;
 
-   // // remocoes aleatorias
-   // printf ("Remocao %d vezes um elemento aleatório...\n", N) ;
-   // while (fila0)
-   // {
-   //    i = random() % queue_size ((queue_t*) fila0) ;
-   //    aux = fila0 ;
-   //    while (i)
-   //    {
-   //       i-- ;
-   //       aux = aux->next ;
-   //    }
-   //    queue_remove ((queue_t**) &fila0, (queue_t*) aux) ;
-   // }
-   // assert (fila0 == NULL) ;             // fila deve estar vazia
-   // printf ("Ok, apos %d remocoes aleatorias a fila ficou vazia\n", N) ;
+   // remocoes aleatorias
+   printf ("Remocao %d vezes um elemento aleatório...\n", N) ;
+   while (fila0)
+   {
+      i = random() % queue_size ((queue_t*) fila0) ;
+      aux = fila0 ;
+      while (i)
+      {
+         i-- ;
+         aux = aux->next ;
+      }
+      queue_remove ((queue_t**) &fila0, (queue_t*) aux) ;
+   }
+   assert (fila0 == NULL) ;             // fila deve estar vazia
+   printf ("Ok, apos %d remocoes aleatorias a fila ficou vazia\n", N) ;
 
-   // printf ("Testes de remocao funcionaram!\n") ;
+   printf ("Testes de remocao funcionaram!\n") ;
 
-   // // PARTE 3: operações inválidas =============================================
+   // PARTE 3: operações inválidas =============================================
 
-   // // inicializa os N elementos
-   // for (i=0; i<N; i++)
-   // {
-   //    item[i].id = i ;
-   //    item[i].prev = NULL ;
-   //    item[i].next = NULL ;
-   // }
+   // inicializa os N elementos
+   for (i=0; i<N; i++)
+   {
+      item[i].id = i ;
+      item[i].prev = NULL ;
+      item[i].next = NULL ;
+   }
 
-   // // preparar filas de teste
-   // fila0 = NULL ;
-   // fila1 = NULL ;
-   // queue_append ((queue_t**) &fila0, (queue_t*) &item[0]) ;
-   // queue_append ((queue_t**) &fila1, (queue_t*) &item[1]) ;
+   // preparar filas de teste
+   fila0 = NULL ;
+   fila1 = NULL ;
+   queue_append ((queue_t**) &fila0, (queue_t*) &item[0]) ;
+   queue_append ((queue_t**) &fila1, (queue_t*) &item[1]) ;
 
-   // // tentar remover elemento que está em outra fila
-   // printf ("Testando remocao de elemento que está em outra fila...\n") ;
-   // queue_remove ((queue_t**) &fila0, (queue_t*) &item[1]) ;
-   // assert (fila0 == &item[0]) ;
-   // assert (item[0].prev == &item[0]) ;
-   // assert (item[0].next == &item[0]) ;
-   // assert (item[1].prev == &item[1]) ;
-   // assert (item[1].next == &item[1]) ;
-   // printf ("Ok, nao deixou remover um elemento de outra fila\n") ;
+   // tentar remover elemento que está em outra fila
+   printf ("Testando remocao de elemento que está em outra fila...\n") ;
+   queue_remove ((queue_t**) &fila0, (queue_t*) &item[1]) ;
+   assert (fila0 == &item[0]) ;
+   assert (item[0].prev == &item[0]) ;
+   assert (item[0].next == &item[0]) ;
+   assert (item[1].prev == &item[1]) ;
+   assert (item[1].next == &item[1]) ;
+   printf ("Ok, nao deixou remover um elemento de outra fila\n") ;
 
-   // // tentar remover elemento que não está em nenhuma fila
-   // printf ("Testando remocao de elemento que não está em nenhuma fila...\n") ;
-   // queue_remove ((queue_t**) &fila0, (queue_t*) &item[2]) ;
-   // assert (fila0 == &item[0]) ;
-   // assert (item[0].prev == &item[0]) ;
-   // assert (item[0].next == &item[0]) ;
-   // assert (item[2].prev == NULL) ;
-   // assert (item[2].next == NULL) ;
-   // printf ("Ok, nao deixou remover um elemento que não está em nenhuma fila\n") ;
+   // tentar remover elemento que não está em nenhuma fila
+   printf ("Testando remocao de elemento que não está em nenhuma fila...\n") ;
+   queue_remove ((queue_t**) &fila0, (queue_t*) &item[2]) ;
+   assert (fila0 == &item[0]) ;
+   assert (item[0].prev == &item[0]) ;
+   assert (item[0].next == &item[0]) ;
+   assert (item[2].prev == NULL) ;
+   assert (item[2].next == NULL) ;
+   printf ("Ok, nao deixou remover um elemento que não está em nenhuma fila\n") ;
 
-   // // tentar inserir algo que já está na mesma fila
-   // printf ("Testando insercao de elemento que já está na fila...\n") ;
-   // queue_append ((queue_t**) &fila0, (queue_t*) &item[0]) ;
-   // assert (fila0 == &item[0]) ;
-   // assert (item[0].prev == &item[0]) ;
-   // assert (item[0].next == &item[0]) ;
-   // printf ("Ok, não deixou inserir elemento que já estava na fila\n") ;
+   // tentar inserir algo que já está na mesma fila
+   printf ("Testando insercao de elemento que já está na fila...\n") ;
+   queue_append ((queue_t**) &fila0, (queue_t*) &item[0]) ;
+   assert (fila0 == &item[0]) ;
+   assert (item[0].prev == &item[0]) ;
+   assert (item[0].next == &item[0]) ;
+   printf ("Ok, não deixou inserir elemento que já estava na fila\n") ;
 
-   // // tentar inserir algo que está em outra fila
-   // printf ("Testando insercao de elemento que está em outra fila...\n") ;
-   // queue_append ((queue_t**) &fila0, (queue_t*) &item[1]) ;
-   // assert (fila0 == &item[0]) ;
-   // assert (item[0].prev == &item[0]) ;
-   // assert (item[0].next == &item[0]) ;
-   // assert (fila1 == &item[1]) ;
-   // assert (item[1].prev == &item[1]) ;
-   // assert (item[1].next == &item[1]) ;
-   // printf ("Ok, não deixou inserir elemento que está em outra fila\n") ;
+   // tentar inserir algo que está em outra fila
+   printf ("Testando insercao de elemento que está em outra fila...\n") ;
+   queue_append ((queue_t**) &fila0, (queue_t*) &item[1]) ;
+   assert (fila0 == &item[0]) ;
+   assert (item[0].prev == &item[0]) ;
+   assert (item[0].next == &item[0]) ;
+   assert (fila1 == &item[1]) ;
+   assert (item[1].prev == &item[1]) ;
+   assert (item[1].next == &item[1]) ;
+   printf ("Ok, não deixou inserir elemento que está em outra fila\n") ;
 
-   // // criar uma grande fila com entradas dinamicas
-   // fila0 = NULL ;
-   // for (i=0; i< N*N; i++)
-   // {
-   //    aux = (filaint_t*) malloc (sizeof (filaint_t)) ;
-   //    aux->id = i ;
-   //    aux->prev = aux->next = NULL ;
-   //    queue_append ((queue_t**) &fila0, (queue_t*) aux) ;
-   //    assert (fila_correta (fila0)) ;
-   // }
-   // printf ("Ok, criei uma fila com %d elementos ordenados\n", N*N) ;
+   // criar uma grande fila com entradas dinamicas
+   fila0 = NULL ;
+   for (i=0; i< N*N; i++)
+   {
+      aux = (filaint_t*) malloc (sizeof (filaint_t)) ;
+      aux->id = i ;
+      aux->prev = aux->next = NULL ;
+      queue_append ((queue_t**) &fila0, (queue_t*) aux) ;
+      assert (fila_correta (fila0)) ;
+   }
+   printf ("Ok, criei uma fila com %d elementos ordenados\n", N*N) ;
 
-   // // retirar e destruir cada elemento da fila, em sequencia
-   // for (i=0; i< N*N; i++)
-   // {
-   //    aux = (filaint_t *) queue_remove ((queue_t**) &fila0, (queue_t*) fila0) ;
-   //    assert (fila_correta (fila0)) ;
-   //    assert (aux->id == i) ;
-   //    free (aux) ;
-   // }
-   // printf ("Ok, retirei e destrui em ordem %d elementos da fila\n", N*N) ;
+   // retirar e destruir cada elemento da fila, em sequencia
+   for (i=0; i< N*N; i++)
+   {
+      aux = (filaint_t *) queue_remove ((queue_t**) &fila0, (queue_t*) fila0) ;
+      assert (fila_correta (fila0)) ;
+      assert (aux->id == i) ;
+      free (aux) ;
+   }
+   printf ("Ok, retirei e destrui em ordem %d elementos da fila\n", N*N) ;
 
-   // printf ("Testes de operações inválidas funcionaram!\n") ;
+   printf ("Testes de operações inválidas funcionaram!\n") ;
 
-   // // PARTE 4: queue_print =====================================================
+   // PARTE 4: queue_print =====================================================
 
-   // printf ("Teste do queue_print...\n");
+   printf ("Teste do queue_print...\n");
 
-   // // inicializa os N elementos
-   // for (i=0; i<N; i++)
-   // {
-   //    item[i].id = i ;
-   //    item[i].prev = NULL ;
-   //    item[i].next = NULL ;
-   // }
+   // inicializa os N elementos
+   for (i=0; i<N; i++)
+   {
+      item[i].id = i ;
+      item[i].prev = NULL ;
+      item[i].next = NULL ;
+   }
 
-   // // uma fila vazia
-   // fila0 = NULL ;
+   // uma fila vazia
+   fila0 = NULL ;
 
-   // // imprimir a fila
-   // printf ("Saida esperada: []\n") ;
-   // queue_print ("Saida gerada  ", (queue_t*) fila0, print_elem) ;
+   // imprimir a fila
+   printf ("Saida esperada: []\n") ;
+   queue_print ("Saida gerada  ", (queue_t*) fila0, print_elem) ;
 
-   // // uma fila com 10 elementos
-   // for (i=0; i<10;i++)
-   //    queue_append ((queue_t**) &fila0, (queue_t*) &item[i]) ;
+   // uma fila com 10 elementos
+   for (i=0; i<10;i++)
+      queue_append ((queue_t**) &fila0, (queue_t*) &item[i]) ;
 
-   // // imprimir a fila
-   // printf ("Saida esperada: [9<0>1 0<1>2 1<2>3 2<3>4 3<4>5 4<5>6 5<6>7 6<7>8 7<8>9 8<9>0]\n") ;
-   // queue_print ("Saida gerada  ", (queue_t*) fila0, print_elem) ;
+   // imprimir a fila
+   printf ("Saida esperada: [9<0>1 0<1>2 1<2>3 2<3>4 3<4>5 4<5>6 5<6>7 6<7>8 7<8>9 8<9>0]\n") ;
+   queue_print ("Saida gerada  ", (queue_t*) fila0, print_elem) ;
 
-   // printf ("Testes concluidos!!!\n") ;
+   printf ("Testes concluidos!!!\n") ;
 
    exit(0) ;
 }
