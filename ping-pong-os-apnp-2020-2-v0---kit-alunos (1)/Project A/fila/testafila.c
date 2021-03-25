@@ -13,7 +13,7 @@
 #include <assert.h>
 #include "queue.h"
 
-#define N 100
+#define N 11
 
 // A estrutura "filaint_t" será usada com as funções de queue.c usando um
 // casting para o tipo "queue_t". Funciona bem, desde que os campos iniciais
@@ -63,7 +63,6 @@ int fila_correta (filaint_t *fila)
 
    // fila com um só elemento e correta
    if ((fila->next == fila) && (fila->prev == fila))
-      printf("fila vazia");
       return 1 ;
 
    // fila com um só elemento, mas incorreta
@@ -79,7 +78,7 @@ int fila_correta (filaint_t *fila)
    {
       // testa ponteiro next (avaliação em curto-circuito)
       if (aux->next && (aux->next->prev == aux))
-         ; // ponteiro ok
+          ; // ponteiro ok
       else
       {
          printf ("ERRO: ponteiros errados ->next ou ->next->prev\n") ;
@@ -123,7 +122,7 @@ int main (int argc, char **argv, char **envp)
    fila0 = NULL ;
    for (i=0; i<N; i++)
    {
-      printf("\n%d %d\n",queue_size ((queue_t*) fila0), i);
+      
       assert (queue_size ((queue_t*) fila0) == i) ;
       queue_append ((queue_t **) &fila0, (queue_t*) &item[i]) ;
       assert (fila_correta (fila0)) ;
