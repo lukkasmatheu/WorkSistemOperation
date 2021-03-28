@@ -59,12 +59,11 @@ int task_id (){
 void task_yield (){
     if(taskExec != &taskDisp && taskExec != &taskMain){
         task_t* auxiliar = taskExec;
-        sleepQueue= taskExec;
-        auxiliar->state = PPOS_TASK_STATE_READY;
-        queue_append((queue_t **) &readyQueue, (queue_t *) auxiliar);//coloca a tarefa em execução na fila de pronta
+        auxiliar->state= PPOS_TASK_STATE_READY;
+        queue_append((queue_t **) &readyQueue, (queue_t *) taskExec);//coloca a tarefa em execução na fila de pronta
         countTasks++;
     }
-    task_switch (&taskDisp); 
+    task_switch (&taskDisp); //retorna o processador para o dispath
 }
 
 void dispatcher(){
@@ -77,7 +76,7 @@ void dispatcher(){
           // transfere controle para a próxima tarefa
             task_switch (next_ready);   
         }
-        countTasks = queue_size((queue_t *)readyQueue) ;
+        countTasks = queue_size((queue_t *)readyQueue); // atualiza contagem de tarefas de usuario
     }
    // encerra a tarefa dispatcher
    task_exit(0);
@@ -86,6 +85,7 @@ void dispatcher(){
 void task_exit (int exitCode){
     before_task_exit ();
     freeTask = taskExec;
+    taskExec->state = PPOS_TASK_STATE_TERMINATED;
     after_task_exit ();
 }
 

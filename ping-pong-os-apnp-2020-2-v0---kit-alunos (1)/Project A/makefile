@@ -32,13 +32,13 @@ all: $(EXEC)
 # $^ expande as dependências da regra; neste exemplo os 4 arquivos .o 
 #O comando cria o executável ($@ regra-alvo) a partir dos arquivos .o ($^ dependências). Equivalente à gcc -o saida progPrincipal.o mult.o soma.o par.o
 $(EXEC): $(OBJ)
-	$(CC) -o $@ $^ 
+	$(CC) -Wall -o  $@ $^ 
 
 #================
 #A regra %.o: (ou seja, a regra para cada um dos arquivos .o) tem como dependências os arquivos .c (%c)
 #O comando gera os arquivos .o ($@ regra-alvo) a partir de seus respectivos arquivos .c ($^ dependências). 
 %.o: %.c
-	$(CC) -o $@ -c $^ 
+	$(CC) -o $@  -c $^ 
 
 #================
 #A regra clean: apaga os arquivos .o ao digitarmos make clean na console

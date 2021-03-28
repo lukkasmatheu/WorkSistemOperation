@@ -4,23 +4,20 @@
 
 task_t * scheduler() {
     if ( readyQueue != NULL ) {
-      task_t *minorPrio = readyQueue;
-      task_t *auxiliar = readyQueue;
-      do{
-            if(auxiliar->prioridade < minorPrio->prioridade ) {
+        task_t *minorPrio = readyQueue; // menor prioridade
+        task_t *auxiliar = readyQueue; // fila auxiliar para percorrer fila de tarefas prontas
+        do{
+            if(auxiliar->prioridade <= minorPrio->prioridade ) { //seleciona a menor prio
                 minorPrio = auxiliar;
             }
-           
+            
             auxiliar = auxiliar->next;
         }while( auxiliar != readyQueue);
-        for(auxiliar; auxiliar->next != readyQueue ; auxiliar = auxiliar->next ){
+        do{
+             //verifica se prioridade não vai estrapolar o MINPRIO (valor minimo de prioridade)
             if((auxiliar->prioridade + ENVELHECIMENTO) > MINPRIO ) {
                 auxiliar->prioridade += ENVELHECIMENTO;
             }
-        }
-        auxiliar = readyQueue;
-        do{
-            
             auxiliar = auxiliar->next;
         }while( auxiliar != readyQueue);
         minorPrio->prioridade = minorPrio->prioridadeEstatica;
