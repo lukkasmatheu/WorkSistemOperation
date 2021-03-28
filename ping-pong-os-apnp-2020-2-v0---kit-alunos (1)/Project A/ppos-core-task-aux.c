@@ -5,8 +5,6 @@
 // ****************************************************************************
 // Coloque aqui as suas modificações, p.ex. includes, defines variáveis, 
 // estruturas e funções
-
-
 // ****************************************************************************
 
 
@@ -19,21 +17,27 @@ void before_ppos_init () {
 }
 
 void after_ppos_init ( ) {
+    task_create(&taskDisp,dispatcher, "dispatcher");
     // put your customization here
 #ifdef DEBUG
     printf("\ninit - AFTER");
 #endif
 }
 
-void before_task_create (task_t *task ) {
-    // put your customization here
+void before_task_create (task_t *task ) {  
 #ifdef DEBUG
     printf("\ntask_create - BEFORE - [%d]", task->id);
 #endif
 }
 
 void after_task_create (task_t *task ) {
-    // put your customization here
+   if(task->id != taskDisp.id){ 
+        queue_append((queue_t **) &readyQueue, (queue_t *) task);
+        task->joinQueue = (queue_t **) &readyQueue;
+        task->queue = (queue_t **) &readyQueue;
+        task->state = PPOS_TASK_STATE_READY;
+        countTasks++;
+    }
 #ifdef DEBUG
     printf("\ntask_create - AFTER - [%d]", task->id);
 #endif
@@ -48,6 +52,13 @@ void before_task_exit () {
 
 void after_task_exit () {
     // put your customization here
+    if(countTasks < 1)
+        task_switch(&taskMain);
+    else{
+        countTasks -- ;
+        task_switch(&taskDisp);
+    }   
+    
 #ifdef DEBUG
     printf("\ntask_exit - AFTER- [%d]", taskExec->id);
 #endif
@@ -61,7 +72,7 @@ void before_task_switch ( task_t *task ) {
 }
 
 void after_task_switch ( task_t *task ) {
-    // put your customization here
+    swapcontext(&task->context,&taskExec->context);
 #ifdef DEBUG
     printf("\ntask_switch - AFTER - [%d -> %d]", taskExec->id, task->id);
 #endif
@@ -112,5 +123,8 @@ void after_task_sleep () {
 // retorna o relógio atual (em milisegundos)
 unsigned int systime () {
     // put your customization here
+
+
+
     return 0;
 }

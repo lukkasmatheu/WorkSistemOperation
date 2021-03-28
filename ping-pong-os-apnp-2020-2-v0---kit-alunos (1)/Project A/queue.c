@@ -16,29 +16,31 @@ void queue_append (queue_t **queue, queue_t *elem){
             printf("\nElemento inexistente\n");
         }
         return;
-    }else if(elem->prev == NULL && elem->next == NULL){
+    }else if(elem->prev && elem->next){
+        printf("\nElemento ja esta em outra fila\n");
+    }else{
         if(*queue == NULL){
             *queue = elem ;
             (*queue)->prev = (*queue)->next = elem;
+           
         }
         else{
             elem->prev = (*queue)->prev;
             (elem->prev)->next = elem;
             (*queue)->prev = elem ;
             elem->next = *queue;
-        }
-    }else{
-        printf("\nElemento ja esta em outra fila\n");
+           
+        }   
     }
 }
 
 
 // Remove o elemento indicado da fila, sem o destruir.
 // Condicoes a verificar, gerando msgs de erro:
-// - a fila deve existir                        CHECK!!!!
-// - a fila nao deve estar vazia
-// - o elemento deve existir
-// - o elemento deve pertencer a fila indicada
+// - a fila deve existir                                    CHECK!!!!
+// - a fila nao deve estar vazia                            CHECK!!!!
+// - o elemento deve existir                    
+// - o elemento deve pertencer a fila indicada              CHECK!!!!
 // Retorno: apontador para o elemento removido, ou NULL se erro
 
 queue_t *queue_remove (queue_t **queue, queue_t *elem) {
@@ -60,7 +62,6 @@ queue_t *queue_remove (queue_t **queue, queue_t *elem) {
         achou = 1;
     }
     for( auxiliar = auxiliar->next ; auxiliar != *queue ;auxiliar = auxiliar->next ){
-        printf("\n%p === %p\n ", elem , *queue);
         if(auxiliar == elem){
             achou = 1;
             break;

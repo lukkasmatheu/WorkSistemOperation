@@ -13,7 +13,7 @@
 
 #define MAXPRIO 20
 #define MINPRIO -20
-#define ENVELHECIMENTO -1
+
 // Estrutura que define um Task Control Block (TCB)
 typedef struct task_t
 {
@@ -28,7 +28,8 @@ typedef struct task_t
    unsigned int awakeTime; // used to store the time when it should be waked up
 
    // ... (outros campos deve ser adicionados APOS esse comentario)
-   int prioridade;// prioridade default - 0 
+   int prioridade;// prioridade default - 0
+   int prioridadeEstatica;
 
 } task_t ;
 

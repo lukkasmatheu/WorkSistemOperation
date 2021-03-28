@@ -86,6 +86,8 @@ void task_yield () ;
 void before_task_yield () ;
 void after_task_yield () ;
 
+void dispatcher ();
+
 // suspende/bloqueia uma tarefa, colocando-a na lista queue
 void task_suspend( task_t *task, task_t **queue ) ;
 void before_task_suspend( task_t *task ) ;

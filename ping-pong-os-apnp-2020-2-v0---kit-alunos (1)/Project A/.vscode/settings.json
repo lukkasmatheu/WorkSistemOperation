@@ -1,0 +1,7 @@
+{
+    "C_Cpp.errorSquiggles": "Enabled",
+    "files.associations": {
+        "ppos-core-globals.h": "c",
+        "ppos.h": "c"
+    }
+}
