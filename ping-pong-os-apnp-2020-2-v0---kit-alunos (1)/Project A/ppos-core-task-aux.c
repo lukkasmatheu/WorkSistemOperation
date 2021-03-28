@@ -31,13 +31,12 @@ void before_task_create (task_t *task ) {
 }
 
 void after_task_create (task_t *task ) {
-   if(task->id != taskDisp.id){ 
+    if(task != &taskDisp){
         queue_append((queue_t **) &readyQueue, (queue_t *) task);
-        task->joinQueue = (queue_t **) &readyQueue;
-        task->queue = (queue_t **) &readyQueue;
-        task->state = PPOS_TASK_STATE_READY;
         countTasks++;
+        task->state = PPOS_TASK_STATE_READY;
     }
+    
 #ifdef DEBUG
     printf("\ntask_create - AFTER - [%d]", task->id);
 #endif
@@ -52,7 +51,7 @@ void before_task_exit () {
 
 void after_task_exit () {
     // put your customization here
-    if(countTasks < 1)
+    if(countTasks <= 1)
         task_switch(&taskMain);
     else{
         countTasks -- ;

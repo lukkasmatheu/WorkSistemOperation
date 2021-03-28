@@ -1,41 +1,62 @@
 main: inicio
-                    Pung: inicio (prioridade 7)
-                    Pung: 0
-                    Pung: 1
-                Pong: inicio (prioridade 5)
-                Pong: 0
-                    Pung: 2
-                Pong: 1
-                    Pung: 3
-            Ping: inicio (prioridade 3)
-            Ping: 0
-                Pong: 2
-                    Pung: 4
-            Ping: 1
-                Pong: 3
-                    Pung: 5
-        Peng: inicio (prioridade 1)
-        Peng: 0
-            Ping: 2
-                Pong: 4
-                    Pung: 6
-        Peng: 1
-            Ping: 3
-                Pong: 5
-                    Pung: 7
-    Pang: inicio (prioridade -1)
-    Pang: 0
-        Peng: 2
-            Ping: 4
-                Pong: 6
-                    Pung: 8
-    Pang: 1
-        Peng: 3
-            Ping: 5
-                Pong: 7
-                    Pung: 9
-    Pang: 2
-        Peng: 4
-            Ping: 6
-                Pong: 8
+    Pang: inicio (prioridade 0)
+    Pang: 0 
+        Peng: inicio (prioridade 2)
+        Peng: 0 
+    Pang: 1 
+            Ping: inicio (prioridade 4)
+            Ping: 0 
+    Pang: 2 
+        Peng: 1 
+                Pong: inicio (prioridade 6)
+                Pong: 0 
+    Pang: 3 
+                    Pung: inicio (prioridade 8)
+                    Pung: 0 
+            Ping: 1 
+        Peng: 2 
+    Pang: 4 
+    Pang: 5 
+                Pong: 1 
+        Peng: 3 
+    Pang: 6 
+            Ping: 2 
+    Pang: 7 
+                    Pung: 1 
+        Peng: 4 
+    Pang: 8 
+                Pong: 2 
+            Ping: 3 
+    Pang: 9 
+        Peng: 5 
+    Pang: fim
+                    Pung: 2 
+            Ping: 4 
+        Peng: 6 
+                Pong: 3 
+        Peng: 7 
+            Ping: 5 
+        Peng: 8 
+                    Pung: 3 
+        Peng: 9 
+                Pong: 4 
+            Ping: 6 
+        Peng: fim
+            Ping: 7 
+                    Pung: 4 
+                Pong: 5 
+            Ping: 8 
+            Ping: 9 
+                Pong: 6 
+            Ping: fim
+                    Pung: 5 
+                Pong: 7 
+                Pong: 8 
+                    Pung: 6 
+                Pong: 9 
+                Pong: fim
+                    Pung: 7 
+                    Pung: 8 
+                    Pung: 9 
                     Pung: fim
+main: fim

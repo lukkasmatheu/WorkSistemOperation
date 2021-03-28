@@ -10,14 +10,22 @@ task_t * scheduler() {
             if(auxiliar->prioridade < minorPrio->prioridade ) {
                 minorPrio = auxiliar;
             }
-            if((auxiliar->prioridade + ENVELHECIMENTO) > -20){
+           
+            auxiliar = auxiliar->next;
+        }while( auxiliar != readyQueue);
+        for(auxiliar; auxiliar->next != readyQueue ; auxiliar = auxiliar->next ){
+            if((auxiliar->prioridade + ENVELHECIMENTO) > MINPRIO ) {
                 auxiliar->prioridade += ENVELHECIMENTO;
             }
+        }
+        auxiliar = readyQueue;
+        do{
+            
             auxiliar = auxiliar->next;
         }while( auxiliar != readyQueue);
         minorPrio->prioridade = minorPrio->prioridadeEstatica;
+        minorPrio->state = PPOS_TASK_STATE_EXECUTING;
         queue_remove((queue_t **)&readyQueue, (queue_t *) minorPrio);
-        countTasks--;
         minorPrio->joinQueue = minorPrio->queue = NULL;
         return minorPrio;
     }

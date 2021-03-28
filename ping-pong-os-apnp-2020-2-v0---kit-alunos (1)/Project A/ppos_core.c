@@ -3,10 +3,10 @@
 
 task_t taskMain;
 task_t* taskExec;
-task_t* freeTask;
 task_t taskDisp;
 task_t* readyQueue;
 task_t* freeTask;
+task_t* sleepQueue;
 long nextid;
 long countTasks;
 
@@ -16,6 +16,7 @@ void ppos_init (){
     
     taskExec = &taskMain;
     readyQueue = NULL;
+    sleepQueue = NULL;
     countTasks= 0;
     taskMain.id = nextid;
     nextid++;
@@ -56,8 +57,10 @@ int task_id (){
 }
 
 void task_yield (){
-    if(taskExec != &taskMain && taskExec != &taskDisp){
-        task_t *auxiliar = taskExec;
+    if(taskExec != &taskDisp && taskExec != &taskMain){
+        task_t* auxiliar = taskExec;
+        sleepQueue= taskExec;
+        auxiliar->state = PPOS_TASK_STATE_READY;
         queue_append((queue_t **) &readyQueue, (queue_t *) auxiliar);//coloca a tarefa em execução na fila de pronta
         countTasks++;
     }
@@ -74,6 +77,7 @@ void dispatcher(){
           // transfere controle para a próxima tarefa
             task_switch (next_ready);   
         }
+        countTasks = queue_size((queue_t *)readyQueue) ;
     }
    // encerra a tarefa dispatcher
    task_exit(0);
@@ -81,7 +85,6 @@ void dispatcher(){
 
 void task_exit (int exitCode){
     before_task_exit ();
-    printf("tarefa encerrada codigo: %d",exitCode);
     freeTask = taskExec;
     after_task_exit ();
 }
