@@ -1,17 +1,16 @@
 #include "ppos.h"
 #include "ppos-core-globals.h"
-#define ENVELHECIMENTO -1
+
 
 task_t * scheduler() {
     if ( readyQueue != NULL ) {
         task_t *minorPrio = readyQueue; // menor prioridade
         task_t *auxiliar = readyQueue; // fila auxiliar para percorrer fila de tarefas prontas
-        do{
-            if(auxiliar->prioridade <= minorPrio->prioridade ) { //seleciona a menor prio
+        do{ 
+            //seleciona a menor prioridade , das tarefas prontas e escolhe a com menor prioridade para executar
+            if(auxiliar->prioridade <= minorPrio->prioridade ) { 
                 minorPrio = auxiliar;
             }
-            
-            
             auxiliar = auxiliar->next;
         }while( auxiliar != readyQueue);
         do{
