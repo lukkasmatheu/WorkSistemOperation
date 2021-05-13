@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "disk.h": "c",
+        "ppos_disk.h": "c",
+        "ppos.h": "c",
+        "ppos_data.h": "c",
+        "signal.h": "c",
+        "stdio.h": "c",
+        "ucontext.h": "c"
+    }
+}

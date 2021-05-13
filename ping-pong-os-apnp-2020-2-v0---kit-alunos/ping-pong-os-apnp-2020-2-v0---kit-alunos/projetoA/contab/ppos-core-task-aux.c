@@ -61,7 +61,7 @@ void after_ppos_init () {
         // ajusta valores do temporizador
         timer.it_value.tv_sec  = 0 ; 
         timer.it_interval.tv_sec  =  0; 
-        timer.it_value.tv_usec = 2;    // primeiro disparo, em micro-segundos    
+        timer.it_value.tv_usec = 1;    // primeiro disparo, em micro-segundos    
         timer.it_interval.tv_usec = 1000;   // disparos subsequentes, em micro-segundos 
 
         // arma o temporizador ITIMER_REAL
@@ -113,7 +113,7 @@ void after_task_exit () {
     int fim = systime();
     taskExec->totalTimeExec = fim - inicio;
     
-   printf("\ntask_exit code:[%d] tempo total : %d | ativacoes: %d | tempo de processamento: %d  ", taskExec->id,taskExec->totalTimeExec, taskExec->ativacoes,taskExec->timeExec);
+   printf("\ntask_exit code:[%d] tempo total : %d | ativacoes: %d | tempo de processamento: %d \n", taskExec->id,taskExec->totalTimeExec, taskExec->ativacoes,taskExec->timeExec);
 #ifdef DEBUG
     printf("\ntask_exit - AFTER- [%d]", taskExec->id);
 #endif

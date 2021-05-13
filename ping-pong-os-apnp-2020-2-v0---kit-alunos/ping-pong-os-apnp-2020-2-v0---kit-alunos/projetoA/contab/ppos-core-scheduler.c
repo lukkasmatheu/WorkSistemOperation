@@ -35,9 +35,7 @@ task_t * scheduler() {
 
 
 void task_setprio (task_t *task, int prio) {
-    if(preemption == 1){
-        preemption = 0 ;
-    }
+
     if(prio > MAXPRIO || prio < MINPRIO)
         return;    
     if(task){

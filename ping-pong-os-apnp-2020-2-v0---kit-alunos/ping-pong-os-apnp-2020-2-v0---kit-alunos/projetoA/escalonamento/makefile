@@ -12,7 +12,7 @@ all: $(EXEC)
 	@echo " "
 
 $(EXEC): $(OBJ)
-	$(CC) -Wall -o $@ -DDEBUG $^ 
+	$(CC) -Wall -o $@ $^ 
 
 %.o: %.c
 	$(CC) -Wall -o $@  -c $^

@@ -32,6 +32,7 @@ typedef struct task_t
    // ... (outros campos deve ser adicionados APOS esse comentario)
    int prioridade;// prioridade default - 0
    int prioridadeEstatica;
+   semaphore_t sem_task; // semaforo da tarefa
    int isUserTask; //indentifica se e uma tarefa de usuario ou de sistema
    unsigned int timeExec;
    unsigned int totalTimeExec; //tempo total da tarefa criada até a finalização

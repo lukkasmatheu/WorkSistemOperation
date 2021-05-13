@@ -2,6 +2,18 @@
 #include "ppos-core-globals.h"
 
 
+// First Come, First Served (FCFS)
+
+task_t * schedulerFCFS(){
+    if ( readyQueue != NULL ) {
+        task_t *auxiliar = readyQueue; 
+        queue_remove((queue_t **)&readyQueue, (queue_t *) auxiliar);
+        return auxiliar;
+    }
+    return NULL;
+}
+
+
 task_t * scheduler() {
     if ( readyQueue != NULL ) {
         task_t *minorPrio = readyQueue; // menor prioridade
@@ -35,9 +47,7 @@ task_t * scheduler() {
 
 
 void task_setprio (task_t *task, int prio) {
-    if(preemption == 1){
-        preemption = 0 ;
-    }
+
     if(prio > MAXPRIO || prio < MINPRIO)
         return;    
     if(task){

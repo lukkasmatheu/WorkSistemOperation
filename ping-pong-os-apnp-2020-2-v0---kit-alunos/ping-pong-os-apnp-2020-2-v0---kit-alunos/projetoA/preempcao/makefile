@@ -1,6 +1,6 @@
 CC = gcc
 
-EXEC = saida
+EXEC = preemp
 
 SRC = pingpong-preempcao.c  ppos-core-scheduler.c ppos-core-task-aux.c
 

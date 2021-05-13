@@ -31,7 +31,7 @@ int main (int argc, char *argv[])
 {
   printf ("main: inicio\n");
 
-  ppos_init () ;
+  ppos_init () ; 
 
   task_create (&Pang, Body, "    Pang") ;
   task_setprio (&Pang, 0);

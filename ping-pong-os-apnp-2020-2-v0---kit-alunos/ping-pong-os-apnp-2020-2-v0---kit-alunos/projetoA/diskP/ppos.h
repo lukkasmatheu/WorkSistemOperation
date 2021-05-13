@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 // Interface do núcleo para as aplicações
 #ifndef __PPOS__
 #define __PPOS__
@@ -46,7 +45,6 @@ Ex. a função after_task_create()) eh chamada após todas as variaveis e estrut
 da tarefa estarem alocadas e devidademente inicializadas. Após o retorno dessa funcao, a 
 nova tarefa é incluída na fila de tarefas prontas.
 */
-// funcao relogio interno
 
 // Inicializa o sistema operacional; deve ser chamada no inicio do main()
 void ppos_init ();
@@ -82,6 +80,7 @@ int task_id () ;
 
 // operações de escalonamento ==================================================
 
+
 // libera o processador para a próxima tarefa, retornando à fila de tarefas
 // prontas ("ready queue")
 void task_yield () ;
@@ -107,6 +106,7 @@ int task_getprio (task_t *task) ;
 // retorna a proxima tarefa a ser executada conforme a politica de escalonamento
 task_t * scheduler() ;
 
+task_t * schedulerFCFS() ;
 // operações de gestão do tempo ================================================
 
 // suspende a tarefa corrente por t milissegundos
@@ -122,6 +122,8 @@ unsigned int systime () ;
 
 // a tarefa corrente aguarda o encerramento de outra task
 int task_join (task_t *task) ;
+int before_task_join (task_t *task) ;
+int after_task_join (task_t *task) ;
 
 // operações de IPC ============================================================
 
@@ -129,57 +131,89 @@ int task_join (task_t *task) ;
 
 // cria um semáforo com valor inicial "value"
 int sem_create (semaphore_t *s, int value) ;
+int before_sem_create (semaphore_t *s, int value) ;
+int after_sem_create (semaphore_t *s, int value) ;
 
 // requisita o semáforo
 int sem_down (semaphore_t *s) ;
+int before_sem_down (semaphore_t *s) ;
+int after_sem_down (semaphore_t *s) ;
 
 // libera o semáforo
 int sem_up (semaphore_t *s) ;
+int before_sem_up (semaphore_t *s) ;
+int after_sem_up (semaphore_t *s) ;
 
 // destroi o semáforo, liberando as tarefas bloqueadas
 int sem_destroy (semaphore_t *s) ;
+int before_sem_destroy (semaphore_t *s) ;
+int after_sem_destroy (semaphore_t *s) ;
 
 // mutexes
 
 // Inicializa um mutex (sempre inicialmente livre)
 int mutex_create (mutex_t *m) ;
+int before_mutex_create (mutex_t *m) ;
+int after_mutex_create (mutex_t *m) ;
 
 // Solicita um mutex
 int mutex_lock (mutex_t *m) ;
+int before_mutex_lock (mutex_t *m) ;
+int after_mutex_lock (mutex_t *m) ;
 
 // Libera um mutex
 int mutex_unlock (mutex_t *m) ;
+int before_mutex_unlock (mutex_t *m) ;
+int after_mutex_unlock (mutex_t *m) ;
 
 // Destrói um mutex
 int mutex_destroy (mutex_t *m) ;
+int before_mutex_destroy (mutex_t *m) ;
+int after_mutex_destroy (mutex_t *m) ;
 
 // barreiras
 
 // Inicializa uma barreira
 int barrier_create (barrier_t *b, int N) ;
+int before_barrier_create (barrier_t *b, int N) ;
+int after_barrier_create (barrier_t *b, int N) ;
 
 // Chega a uma barreira
 int barrier_join (barrier_t *b) ;
+int before_barrier_join (barrier_t *b) ;
+int after_barrier_join (barrier_t *b) ;
 
 // Destrói uma barreira
 int barrier_destroy (barrier_t *b) ;
+int before_barrier_destroy (barrier_t *b) ;
+int after_barrier_destroy (barrier_t *b) ;
 
 // filas de mensagens
 
 // cria uma fila para até max mensagens de size bytes cada
 int mqueue_create (mqueue_t *queue, int max, int size) ;
+int before_mqueue_create (mqueue_t *queue, int max, int size) ;
+int after_mqueue_create (mqueue_t *queue, int max, int size) ;
 
 // envia uma mensagem para a fila
 int mqueue_send (mqueue_t *queue, void *msg) ;
+int before_mqueue_send (mqueue_t *queue, void *msg) ;
+int after_mqueue_send (mqueue_t *queue, void *msg) ;
 
 // recebe uma mensagem da fila
 int mqueue_recv (mqueue_t *queue, void *msg) ;
+int before_mqueue_recv (mqueue_t *queue, void *msg) ;
+int after_mqueue_recv (mqueue_t *queue, void *msg) ;
 
 // destroi a fila, liberando as tarefas bloqueadas
 int mqueue_destroy (mqueue_t *queue) ;
+int before_mqueue_destroy (mqueue_t *queue) ;
+int after_mqueue_destroy (mqueue_t *queue) ;
 
 // informa o número de mensagens atualmente na fila
 int mqueue_msgs (mqueue_t *queue) ;
+int before_mqueue_msgs (mqueue_t *queue) ;
+int after_mqueue_msgs (mqueue_t *queue) ;
 
 // funcao para debug. imprime os campos da estrutura task_t
 void print_tcb( task_t* task );
@@ -255,8 +289,8 @@ void print_tcb( task_t* task );
 #define STACKSIZE              32768
 
 #define PRINT_READY_QUEUE      queue_print ("Ready Queue", (queue_t*)readyQueue, (void*)&print_tcb );
-#define PPOS_PREEMPT_ENABLE    preemption = 1;
-#define PPOS_PREEMPT_DISABLE   preemption = 0;
-#define PPOS_IS_PREEMPT_ACTIVE (preemption == 1)
+#define PPOS_PREEMPT_ENABLE    preemption--;
+#define PPOS_PREEMPT_DISABLE   preemption++;
+#define PPOS_IS_PREEMPT_ACTIVE (preemption == 0)
 
 #endif

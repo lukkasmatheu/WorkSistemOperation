@@ -113,4 +113,5 @@ void after_task_sleep () {
 
 // retorna o relógio atual (em milisegundos)
 unsigned int systime () {
+    return 0;
 }
