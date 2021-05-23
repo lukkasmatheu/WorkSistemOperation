@@ -11,11 +11,6 @@
 #include <ucontext.h>		// biblioteca POSIX de trocas de contexto
 #include "queue.h"		// biblioteca de filas genéricas
 
-#define MAXPRIO 20
-#define MINPRIO -20
-#define ENVELHECIMENTO -1
-
-
 // Estrutura que define um Task Control Block (TCB)
 typedef struct task_t
 {
@@ -30,16 +25,17 @@ typedef struct task_t
    unsigned int awakeTime; // used to store the time when it should be waked up
 
    // ... (outros campos deve ser adicionados APOS esse comentario)
-   int prioridade;// prioridade default - 0
-   int prioridadeEstatica;
-   int isUserTask; //indentifica se e uma tarefa de usuario ou de sistema
-   unsigned int timeExec;
-   unsigned int totalTimeExec; //tempo total da tarefa criada até a finalização
-   unsigned int ativacoes;
+   int s_prio;
+   int d_prio;
+
+   int quantum;
+
+   int creation_time;
+   int running_time;
+   int activation_time;
+   int activation_count;
 
 } task_t ;
-
-
 
 // estrutura que define um semáforo
 typedef struct {
@@ -62,8 +58,8 @@ typedef struct {
     struct task_t *queue;
     int maxTasks;
     int countTasks;
-
     unsigned char active;
+    mutex_t mutex;
 } barrier_t ;
 
 // estrutura que define uma fila de mensagens

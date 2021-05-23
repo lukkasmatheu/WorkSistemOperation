@@ -15,10 +15,14 @@
 // tipicamente um disco rigido.
 
 // estrutura que representa um disco no sistema operacional
-typedef struct
+typedef struct disk_t
 {
-  int busy;         //indica se disco esta ocupado
+  struct task_t* tarefas_disco; //tarefas suspensas do disco
+  struct task_t* execDisc; //tarefa que esta sendo atendida
+  int state;         //indica estado do disco
   int sinal;        //flag sinal de disco
+  int head;         // indica onde esta a cabeça do leitor
+  int contador;     // blocos percorridos pelo leitor de disco
   semaphore_t sem_disk;
   // completar com os campos necessarios
 } disk_t ;
@@ -28,15 +32,23 @@ typedef struct
 //cada pedido indica a tarefa solicitante, 
 //o tipo de pedido (leitura ou escrita),
 // o bloco desejado e o endereço do buffer de dados;
-typedef struct{
+typedef struct pedido{
+  struct pedido* next; // encademento da fila de pedidos
+  struct pedido* prev;
   task_t* emissor; // tarefa emissora do pedido
   int tipo_pedido; // tipo de pedido E/S
   int bloco; // bloco da operação 
-  char *buffer ; // buffer onde sera armazenado a leitura ou a escrita
-  struct pedido* next; // encademento da fila de pedidos
-  struct pedido* prev;
+  void* buffer ; // buffer onde sera armazenado a leitura ou a escrita
+  
 }pedido;
 
+
+// modelos de escalonamento de pedidos
+pedido* pedidosFCFS();
+
+pedido* pedidosSSTF(int head);
+
+pedido* pedidoCSCAN(int head);
 
 void diskDriverBody (void * args);
 
