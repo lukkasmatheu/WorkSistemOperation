@@ -4,9 +4,9 @@ EXEC = disco
 
 
 # ppos_disk.c disk.c ppos_disk.o disk.o pingpong-disco1.o
-SRC = pingpong-disco2.c ppos_disk.c disk.c ppos_disk.c disk.c ppos-core-task-aux.c 
+SRC = pingpong-disco1.c ppos_disk.c disk.c ppos_disk.c disk.c ppos-core-task-aux.c 
 
-OBJ =  pingpong-disco2.o ppos_disk.o disk.o ppos-core-task-aux.o ppos-all.o queue.o 
+OBJ =  pingpong-disco1.o ppos_disk.o disk.o ppos-core-task-aux.o ppos-all.o queue.o 
 
 all: $(EXEC)
 	@echo " "

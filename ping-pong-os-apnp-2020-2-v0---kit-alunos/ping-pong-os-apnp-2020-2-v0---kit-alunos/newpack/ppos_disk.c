@@ -22,7 +22,7 @@ void tratadorDisk(int signum){
 
 // modelo de escalonamento FCFS
 pedido* pedidosFCFS(){
-   return (pedido *) queue_remove((queue_t **)&fila_disco, (queue_t *)fila_disco);
+   return (pedido *) queue_remove((queue_t **)&fila_disco, (queue_t *)fila_disco); // remove o pedido da cabeça da fila
 }
 
 // modelo de escalonamento SSTF
@@ -63,13 +63,14 @@ pedido* pedidoCSCAN(int head){
       int minorNext = 999;
 
       do{
-         // procura o bloco seguinte ao da cabeça em ordem crescente, sendo esse bloco maior do que o da cabeça e menor que todos os seguintes apos a cabeça
+         // procura o bloco seguinte ao da cabeça em ordem crescente
          if(auxOrder->bloco > head && auxOrder->bloco < minorNext){
             minorNext = auxOrder->bloco;
             nextOrder = auxOrder;
             auxFlag = 1;
          }
-         if(auxOrder->bloco < minorBlock && auxFlag == 0){
+         else if(auxOrder->bloco < minorBlock && auxFlag == 0){
+            //busca o menor bloco em quanto não encontra um bloco sequente ao da cabeça em ordem crescente
             minorBlock = auxOrder->bloco;
             minOrder = auxOrder;
          }
@@ -91,11 +92,13 @@ void diskDriverBody (void * args){
    while (1) {
       // obtém o semáforo de acesso ao disco
       sem_down(&disk.sem_disk);
+
       // se foi acordado devido a um sinal do disco
       if (disk.sinal == 1){
          // acorda a tarefa cujo pedido foi atendido
          task_resume(disk.execDisc); //acorda a tarefa colocando a na fila de pronta
          disk.sinal = 0;
+        
       }
       
       // se o disco estiver livre e houver pedidos de E/S na fila
@@ -105,21 +108,24 @@ void diskDriverBody (void * args){
         
          //basta alterar entre as formas de escalonamento abaixo
          
-         // pedido *order = pedidosFCFS();
+         pedido *order = pedidosFCFS();
          
          // pedido *order = pedidosSSTF(disk.head);
          
-         pedido *order = pedidoCSCAN(disk.head);
+         // pedido *order = pedidoCSCAN(disk.head);
 
-         if(order != NULL){
+         if(order != NULL){            
             // solicita ao disco a operação de E/S, usando disk_cmd()
-            disk.contador = disk.contador + abs(disk.head - order->bloco);
-            disk.head = order->bloco;
-            disk.execDisc = order->emissor;
             int result = disk_cmd(order->tipo_pedido,order->bloco,order->buffer);
+
             if(result == 0){
-               
-               printf("Agendamento concluido\n Bloco percorridos até o momento - %d \n",disk.contador);
+               //contabiliza distancia percorrida pela cabeça do leitor
+               disk.contador = disk.contador + abs(disk.head - order->bloco);
+               disk.head = order->bloco;
+               disk.execDisc = order->emissor; // seta o pedido que esta sendo atendido no momento
+
+               printf("Agendamento concluido\n");  
+               printf("Bloco percorridos até o momento - %d \n",disk.contador);
             }else{
                printf("Error ao realizar agendamento");
             }
@@ -128,8 +134,7 @@ void diskDriverBody (void * args){
       // libera o semáforo de acesso ao disco
       sem_up(&disk.sem_disk);
       // suspende a tarefa corrente (retorna ao dispatcher)
-      // printf("Blocos percorridos até o momento %d \n", disk.contador);
-      task_yield(); 
+      task_yield();
    }
 }
 
