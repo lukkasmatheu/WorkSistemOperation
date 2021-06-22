@@ -7,3 +7,6 @@
 >contabilização de metricas (tempo decorrido e atualizações geradas)
 >thread gerenciador de arquivos de disco
 >escalonamento de disco
+
+|Rodar Apenas em sistemas unix/linux
+|Dar privilegios de  execuação para o arquivo Makefile
